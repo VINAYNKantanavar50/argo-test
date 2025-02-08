@@ -1,1 +1,18 @@
-
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: guestbook-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    - host: sourcef.us
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: guestbook-service
+                port:
+                  number: 80
